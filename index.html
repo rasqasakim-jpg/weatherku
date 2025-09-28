@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="assets/icons/foto1.jpg.jpg">
+</head>
+<body>
+    <nav class="navbar">
+        <ul class="nav-links">
+        <img class="logo" src="assets/icons/download.jpg" alt="">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#history">Riwayat</li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+    <header>
+        <h1>Weatherku</h1>
+        <h2 id="currentCity"></h2>
+    </header>
+    <main>
+        <form id="searchForm">
+            <input type="text" id="cityInput" placeholder="Masukkan nama kota" required>
+            <button type="submit">Cari</button>
+        </form>
+        <section id="history">
+            <h2>Riwayat Pencarian</h2>
+            <button id="clearHistoryBtn">Clear</button>
+            <ul id="historyList"></ul>
+        </section>
+       
+    </main>
+    <footer class="footer" id="footer">
+    <div class="social-links">
+            <a href="https://wa.me/6281334362970" target="_blank" title="WhatsApp">
+                <img src="assets/icons/foto2.jpg.svg" alt="WhatsApp" id="whatsapp">
+            </a>
+            <a href="https://instagram.com/irgiharnoyoo" target="_blank" title="Instagram">
+                <img src="assets/icons/foto3.jpg.svg" alt="Instagram" id="instagram">
+            </a>
+        </div>
+        <p>Hubungi Saya</p>
+        <p>&copy; 2025 Weatherku. All rights reserved.</p>
+    </footer>
+
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
