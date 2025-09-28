@@ -13,13 +13,13 @@ Weatherku adalah aplikasi web sederhana yang memungkinkan pengguna untuk mencari
 
 ## Tampilan Aplikasi
 
-*(Anda bisa menambahkan screenshot aplikasi Anda di sini)*
+
 
 **Halaman Utama:**
-![Halaman Utama](https://via.placeholder.com/400x250.png?text=Tampilan+Halaman+Utama)
+![Halaman Utama](assets/icons/foto4.png)
 
 **Halaman Detail:**
-![Halaman Detail](https://via.placeholder.com/400x250.png?text=Tampilan+Halaman+Detail)
+![Halaman Detail](assets/icons/foto5.png)
 
 ## Teknologi yang Digunakan
 
