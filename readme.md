@@ -1,6 +1,6 @@
 # Weatherku - Aplikasi Cuaca Sederhana
 
-Weatherku adalah aplikasi web sederhana yang memungkinkan pengguna untuk mencari dan melihat informasi cuaca terkini dari berbagai kota di seluruh dunia. Aplikasi ini dibangun menggunakan HTML, CSS, dan JavaScript modern (ES Modules) serta terintegrasi dengan API dari OpenWeatherMap.
+Weatherku adalah aplikasi web sederhana yang memungkinkan pengguna untuk mencari dan melihat informasi cuaca terkini dari berbagai kota di seluruh dunia. Aplikasi ini dibangun menggunakan HTML, CSS, dan JavaScript modern (ES Modules). Untuk mengambil data cuaca, aplikasi ini menggunakan fungsi *serverless* (API route) yang di-hosting di Vercel untuk berkomunikasi dengan API dari Weatherstack.
 
 ## Fitur Utama
 
@@ -27,8 +27,10 @@ Weatherku adalah aplikasi web sederhana yang memungkinkan pengguna untuk mencari
   - HTML5
   - CSS3
   - JavaScript (ES Modules)
+- **Backend (Serverless)**:
+  - Vercel Serverless Functions (Node.js)
 - **API**:
-  - [OpenWeatherMap API](https://openweathermap.org/api) untuk mendapatkan data cuaca.
+  - [Weatherstack API](https://weatherstack.com/) untuk mendapatkan data cuaca.
 
 ## Struktur Proyek
 
@@ -36,6 +38,8 @@ Proyek ini diorganisir dengan struktur yang bersih dan modular untuk kemudahan p
 
 ```
 wether-app/
+├── api/                # Folder untuk serverless function (proxy api)
+│   └── weather.js      # proxy API ke Weatherstack
 ├── assets/
 │   └── icons/          # Ikon dan gambar
 ├── css/
@@ -76,6 +80,46 @@ Untuk menjalankan proyek ini di komputer lokal Anda, ikuti langkah-langkah berik
 
 4.  **Jalankan Aplikasi**
     - Buka file `index.html` langsung di browser Anda.
+
+### Permasalahan: Berjalan di Live Server, tetapi gagal di Vercel
+
+Saat pengembangan lokal menggunakan **Open with Live Server** (atau environment localhost), aplikasi cuaca ini dapat berjalan normal. Namun, setelah dideploy ke **Vercel**, muncul masalah: data cuaca tidak bisa ditampilkan dan hanya menampilkan pesan error seperti:
+
+```
+Gagal mengambil data cuaca: load failed
+```
+
+#### Penyebab Utama
+
+* **Weatherstack API (Free Plan)** hanya menyediakan endpoint **HTTP**, bukan HTTPS.
+* Website yang dihosting di **Vercel** sudah menggunakan **HTTPS** secara default.
+* Browser modern **tidak mengizinkan mixed content** (yaitu melakukan request dari HTTPS ke HTTP), sehingga request dari website ke Weatherstack diblokir ketika diakses melalui Vercel.
+
+#### Solusi
+
+Untuk mengatasi masalah ini, dibuat **proxy API** menggunakan **Serverless Function di Vercel**.
+Proxy ini bertugas:
+
+1. Menerima request dari frontend melalui route `/api/weather`.
+2. Meneruskan request tersebut ke Weatherstack API (HTTP).
+3. Mengirimkan kembali data JSON cuaca ke frontend melalui HTTPS (aman).
+
+#### Hasil
+
+Dengan adanya proxy API:
+
+* Aplikasi tetap bisa mengambil data dari Weatherstack.
+* Website bisa berjalan normal baik di **Live Server (localhost)** maupun di **Vercel (HTTPS)**.
+* API key lebih aman karena disimpan di sisi server, bukan langsung di frontend.
+
+Contoh endpoint setelah deploy ke Vercel:
+
+```
+https://weatherku-eight.vercel.app/api/weather?city=Jakarta
+```
+
+Endpoint ini aman digunakan oleh frontend tanpa terkena masalah mixed content.
+
 
 ---
 
