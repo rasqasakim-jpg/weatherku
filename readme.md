@@ -120,6 +120,14 @@ https://weatherku-eight.vercel.app/api/weather?city=Jakarta
 
 Endpoint ini aman digunakan oleh frontend tanpa terkena masalah mixed content.
 
+link vercel:
+https://weatherku-eight.vercel.app/
+
+link canva:
+https://gamma.app/docs/Weather-App-Aplikasi-Cuaca-Sederhana-48g7xibqda36l38
+
+link youtube:
+https://youtu.be/M21bf3QSx04
 
 ---
 
